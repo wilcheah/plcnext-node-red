@@ -1,0 +1,749 @@
+[
+    {
+        "id": "b65d59ec969ecd88",
+        "type": "tab",
+        "label": "NR OEE",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9e7087f6dc5c54cb",
+        "type": "inject",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "ba5e2991eef98255"
+            ]
+        ]
+    },
+    {
+        "id": "6b11aedd36a376f1",
+        "type": "comment",
+        "z": "b65d59ec969ecd88",
+        "name": "Read Data from PLCnext",
+        "info": "",
+        "x": 130,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "2f56d33a02027d02",
+        "type": "debug",
+        "z": "b65d59ec969ecd88",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "85bca90397c0e62f",
+        "type": "comment",
+        "z": "b65d59ec969ecd88",
+        "name": "Write Data to PLCnext",
+        "info": "",
+        "x": 120,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "43b9d13a2e20c485",
+        "type": "debug",
+        "z": "b65d59ec969ecd88",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "dec16544403e83d1",
+        "type": "ui_gauge",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "group": "efde211abf442eaf",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Overall Equipment Effectiveness",
+        "label": "Percentage",
+        "format": "{{value | number:2}} %",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#b30000",
+            "#e6e600",
+            "#00b500"
+        ],
+        "seg1": "50",
+        "seg2": "75",
+        "diff": false,
+        "className": "",
+        "x": 1010,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "727d018600183434",
+        "type": "change",
+        "z": "b65d59ec969ecd88",
+        "name": "Get OEE Value",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.variables[3].value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 220,
+        "wires": [
+            [
+                "dec16544403e83d1",
+                "90cf79fa3f8e53fe"
+            ]
+        ]
+    },
+    {
+        "id": "644ac4f514476a9f",
+        "type": "change",
+        "z": "b65d59ec969ecd88",
+        "name": "Get Actual Availability Value",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.variables[0].value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 100,
+        "wires": [
+            [
+                "bfbdc46dfe0d69e4"
+            ]
+        ]
+    },
+    {
+        "id": "f973f486f29b5f08",
+        "type": "change",
+        "z": "b65d59ec969ecd88",
+        "name": "Get Actual Performance Value",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.variables[1].value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 140,
+        "wires": [
+            [
+                "58e494febee15e53"
+            ]
+        ]
+    },
+    {
+        "id": "53017b09f58f4ea8",
+        "type": "change",
+        "z": "b65d59ec969ecd88",
+        "name": "Get Actual Quality Value",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.variables[2].value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 180,
+        "wires": [
+            [
+                "4e40d119f002a6e6"
+            ]
+        ]
+    },
+    {
+        "id": "bfbdc46dfe0d69e4",
+        "type": "ui_text",
+        "z": "b65d59ec969ecd88",
+        "group": "efde211abf442eaf",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Actual Availability",
+        "format": "{{msg.payload | number:2}} %",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 970,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "58e494febee15e53",
+        "type": "ui_text",
+        "z": "b65d59ec969ecd88",
+        "group": "efde211abf442eaf",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Actual Performance",
+        "format": "{{msg.payload | number:2}} %",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 970,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4e40d119f002a6e6",
+        "type": "ui_text",
+        "z": "b65d59ec969ecd88",
+        "group": "efde211abf442eaf",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Actual Quality",
+        "format": "{{msg.payload | number:2}} %",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 960,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "306cddb98e476e8c",
+        "type": "ui_numeric",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "label": "Planned Time",
+        "tooltip": "",
+        "group": "d12d89ab6373751e",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}} minutes",
+        "min": 0,
+        "max": "10000",
+        "step": "100",
+        "className": "",
+        "x": 100,
+        "y": 360,
+        "wires": [
+            [
+                "804cf6b371b14bf0"
+            ]
+        ]
+    },
+    {
+        "id": "ba5e2991eef98255",
+        "type": "plc-read-variables",
+        "z": "b65d59ec969ecd88",
+        "plc_connector": "8f450208ae798a51",
+        "variables": "Arp.Plc.Eclr/MainPlcCal.ActualAvailability,Arp.Plc.Eclr/MainPlcCal.ActualPerformance,Arp.Plc.Eclr/MainPlcCal.ActualQuality,Arp.Plc.Eclr/MainPlcCal.ActualOEE",
+        "searchbar": "a",
+        "x": 330,
+        "y": 100,
+        "wires": [
+            [
+                "2f56d33a02027d02",
+                "644ac4f514476a9f",
+                "f973f486f29b5f08",
+                "53017b09f58f4ea8",
+                "727d018600183434"
+            ]
+        ]
+    },
+    {
+        "id": "83974804fa665021",
+        "type": "plc-write-variables",
+        "z": "b65d59ec969ecd88",
+        "plc_connector": "8f450208ae798a51",
+        "vars": "",
+        "var_list": "{\"items\":[]}",
+        "searchbar": "Arp.Plc.Eclr/MainPlcCal.qAvailability.iTotalPlannedAvailability",
+        "x": 970,
+        "y": 460,
+        "wires": [
+            [
+                "43b9d13a2e20c485"
+            ]
+        ]
+    },
+    {
+        "id": "804cf6b371b14bf0",
+        "type": "function",
+        "z": "b65d59ec969ecd88",
+        "name": "Send Planned Time",
+        "func": "var value = msg.payload; \n\nmsg.payload= {variables : [ { \n\"path\": \"Arp.Plc.Eclr/MainPlcCal.qAvailability.iTotalPlannedAvailability\", \n\"value\": value, \n\"valueType\": \"Constant\" }]}; \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "83974804fa665021"
+            ]
+        ]
+    },
+    {
+        "id": "a6ad9c34e453562b",
+        "type": "ui_numeric",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "label": "Scheduled Down Time",
+        "tooltip": "",
+        "group": "d12d89ab6373751e",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}} minutes",
+        "min": 0,
+        "max": "10000",
+        "step": "5",
+        "className": "",
+        "x": 120,
+        "y": 400,
+        "wires": [
+            [
+                "f6a0a9ec1bcf796f"
+            ]
+        ]
+    },
+    {
+        "id": "f6a0a9ec1bcf796f",
+        "type": "function",
+        "z": "b65d59ec969ecd88",
+        "name": "Send Scheduled Down Time",
+        "func": "var value = msg.payload; \n\nmsg.payload= {variables : [ { \n\"path\": \"Arp.Plc.Eclr/MainPlcCal.qAvailability.iScheduledDowntime\", \n\"value\": value, \n\"valueType\": \"Constant\" }]}; \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 400,
+        "wires": [
+            [
+                "83974804fa665021"
+            ]
+        ]
+    },
+    {
+        "id": "85f0e8ccb35e880f",
+        "type": "ui_numeric",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "label": "Unscheduled Down Time",
+        "tooltip": "",
+        "group": "d12d89ab6373751e",
+        "order": 3,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}} minutes",
+        "min": 0,
+        "max": "10000",
+        "step": "5",
+        "className": "",
+        "x": 130,
+        "y": 440,
+        "wires": [
+            [
+                "e92855ba4faa6a28"
+            ]
+        ]
+    },
+    {
+        "id": "e92855ba4faa6a28",
+        "type": "function",
+        "z": "b65d59ec969ecd88",
+        "name": "Send Unscheduled Down Time",
+        "func": "var value = msg.payload; \n\nmsg.payload= {variables : [ { \n\"path\": \"Arp.Plc.Eclr/MainPlcCal.qAvailability.iUnscheduledDowntime\", \n\"value\": value, \n\"valueType\": \"Constant\" }]}; \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 440,
+        "wires": [
+            [
+                "83974804fa665021"
+            ]
+        ]
+    },
+    {
+        "id": "f0773ababf4c2f13",
+        "type": "ui_numeric",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "label": "Planned Production",
+        "tooltip": "",
+        "group": "d12d89ab6373751e",
+        "order": 4,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}} Unit",
+        "min": 0,
+        "max": "100000",
+        "step": "100",
+        "className": "",
+        "x": 110,
+        "y": 520,
+        "wires": [
+            [
+                "83910868434c5fd3"
+            ]
+        ]
+    },
+    {
+        "id": "83910868434c5fd3",
+        "type": "function",
+        "z": "b65d59ec969ecd88",
+        "name": "Send Planned Production",
+        "func": "var value = msg.payload; \n\nmsg.payload= {variables : [ { \n\"path\": \"Arp.Plc.Eclr/MainPlcCal.qPerformance.iPlannedProduction\", \n\"value\": value, \n\"valueType\": \"Constant\" }]}; \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 520,
+        "wires": [
+            [
+                "83974804fa665021"
+            ]
+        ]
+    },
+    {
+        "id": "105b9700301c1abd",
+        "type": "ui_numeric",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "label": "Actual Production",
+        "tooltip": "",
+        "group": "d12d89ab6373751e",
+        "order": 5,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}} Unit",
+        "min": 0,
+        "max": "100000",
+        "step": "100",
+        "className": "",
+        "x": 110,
+        "y": 560,
+        "wires": [
+            [
+                "287f63bd693cdecf"
+            ]
+        ]
+    },
+    {
+        "id": "287f63bd693cdecf",
+        "type": "function",
+        "z": "b65d59ec969ecd88",
+        "name": "Send Actual Production",
+        "func": "var value = msg.payload; \n\nmsg.payload= {variables : [ { \n\"path\": \"Arp.Plc.Eclr/MainPlcCal.qPerformance.iActualProduction\", \n\"value\": value, \n\"valueType\": \"Constant\" }]}; \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 560,
+        "wires": [
+            [
+                "83974804fa665021"
+            ]
+        ]
+    },
+    {
+        "id": "0b490418802c15cf",
+        "type": "ui_numeric",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "label": "Scrap",
+        "tooltip": "",
+        "group": "d12d89ab6373751e",
+        "order": 6,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}} Unit",
+        "min": 0,
+        "max": "100000",
+        "step": "1",
+        "className": "",
+        "x": 70,
+        "y": 640,
+        "wires": [
+            [
+                "ed4201878c823f8e"
+            ]
+        ]
+    },
+    {
+        "id": "ed4201878c823f8e",
+        "type": "function",
+        "z": "b65d59ec969ecd88",
+        "name": "Send Scrap",
+        "func": "var value = msg.payload; \n\nmsg.payload= {variables : [ { \n\"path\": \"Arp.Plc.Eclr/MainPlcCal.qQuality.iScrap\", \n\"value\": value, \n\"valueType\": \"Constant\" }]}; \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 640,
+        "wires": [
+            [
+                "83974804fa665021"
+            ]
+        ]
+    },
+    {
+        "id": "86e6407068bf755a",
+        "type": "ui_numeric",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "label": "Rework",
+        "tooltip": "",
+        "group": "d12d89ab6373751e",
+        "order": 7,
+        "width": 6,
+        "height": 1,
+        "wrap": false,
+        "passthru": true,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}} Unit",
+        "min": 0,
+        "max": "100000",
+        "step": "1",
+        "className": "",
+        "x": 80,
+        "y": 680,
+        "wires": [
+            [
+                "b6dc08f762e151a7"
+            ]
+        ]
+    },
+    {
+        "id": "b6dc08f762e151a7",
+        "type": "function",
+        "z": "b65d59ec969ecd88",
+        "name": "Send Rework",
+        "func": "var value = msg.payload; \n\nmsg.payload= {variables : [ { \n\"path\": \"Arp.Plc.Eclr/MainPlcCal.qQuality.iRework\", \n\"value\": value, \n\"valueType\": \"Constant\" }]}; \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 680,
+        "wires": [
+            [
+                "83974804fa665021"
+            ]
+        ]
+    },
+    {
+        "id": "90cf79fa3f8e53fe",
+        "type": "ui_chart",
+        "z": "b65d59ec969ecd88",
+        "name": "",
+        "group": "2b53264f6eedc6a7",
+        "order": 1,
+        "width": 6,
+        "height": "8",
+        "label": "Hourly Log",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "100",
+        "removeOlder": "3",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 950,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "efde211abf442eaf",
+        "type": "ui_group",
+        "name": "Statistic Output",
+        "tab": "506dc18b61e9e1c4",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d12d89ab6373751e",
+        "type": "ui_group",
+        "name": "Factory Input",
+        "tab": "506dc18b61e9e1c4",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8f450208ae798a51",
+        "type": "plc-connector",
+        "host": "192.168.1.10",
+        "station_name": "axc-f-2152-1",
+        "session_timeout": "5000",
+        "api_version": "v1.4",
+        "auth_required": "true"
+    },
+    {
+        "id": "2b53264f6eedc6a7",
+        "type": "ui_group",
+        "name": "OEE Log",
+        "tab": "506dc18b61e9e1c4",
+        "order": 3,
+        "disp": false,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "506dc18b61e9e1c4",
+        "type": "ui_tab",
+        "name": "OEE on Node Red",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
